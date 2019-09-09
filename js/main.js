@@ -32,17 +32,12 @@ function invert () {
 
 function inject () {
     var message = document.getElementById("injectionMessage").value + "<br><br>---End of Message---<br><br>";
+
     var messageBytes = [];
-    for (var i = 0; i < message.length; i++) {
-        messageBytes.push(leadingZeroes(message.charCodeAt(i).toString(2)));
-    }
+    message.split("").forEach(m => messageBytes.push(leadingZeroes(m.charCodeAt(0).toString(2))));
 
     var messageBits = [];
-    messageBytes.forEach(b => {
-        for (var i = 0; i < b.length; i++) {
-            messageBits.push(parseInt(b[i], 2));
-        }
-    });
+    messageBytes.forEach(byte => byte.split("").forEach(bit => messageBits.push(parseInt(bit, 2))));
 
     var imgData = _context.getImageData(0, 0, _canvas.width, _canvas.height);
 
@@ -78,3 +73,28 @@ function extract () {
 
     document.getElementById("extractionMessage").innerHTML = (arr.join(""));
 }
+
+function readSingleFile(e) {
+    var file = e.target.files[0];
+    if (!file) return;
+
+    var reader = new FileReader();
+    reader.onload = e => { _image.src = e.target.result; };
+    reader.readAsDataURL(file);
+}
+
+function displayContents(contents) {
+    document.getElementById("extractionMessage").innerHTML = contents;
+}
+
+function save() {
+    var a  = document.createElement('a');
+    a.href = _canvas.toDataURL('image/png');
+    var filename = _image.src.substring(_image.src.lastIndexOf("/"), _image.src.lastIndexOf(".") - 1);
+    a.download = filename + '_steg.png';
+    document.getElementsByTagName("body")[0].appendChild(a);
+    a.click();
+    document.getElementsByTagName("body")[0].removeChild(a)
+}
+
+document.getElementById('file-input').addEventListener('change', readSingleFile, false);

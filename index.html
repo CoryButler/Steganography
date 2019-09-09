@@ -16,16 +16,34 @@
         <title>Bitwise</title>
     </head>
     <body style="font-family: Consolas">
-        <canvas id="canvas"></canvas>
-        <script src="js/main.js"></script>
-        <p>This image contains a steganographic message. Click "Extract" to view it.<br><br>To inject your own message, enter it into the box below and click "Inject".<br>You can then save the image by right-clicking it.<br><br>The "Invert" is just for fun.</p>
-        <div>
-            <button onclick="extract();">Extract</button>
-            <button onclick="inject();">Inject</button>
-            <button onclick="invert();">Invert</button>
-            <br>
-            <textarea id="injectionMessage"></textarea>
+        <h1 style="text-align: center">STEGANOGRAPHY</h1>
+        <h3 style="text-align: center">Read and Write Steganographic Messages</h3>
+        <ul style="border: 1px solid lightgrey"><u>How to use this page:</u>
+            <li>Browse: Upload an image (JPG, no-alpha PNG)</li>
+            <li>Extract: Extract a steganographic message</li>
+                <ul>
+                    <li>Message will appear below</li>
+                </ul>
+            <li>Inject: Inject a steganographic message
+                <ul>
+                    <li>Enter message into field below</li>
+                </ul>
+            </li>
+            <li>Invert: Invert the color of the image for no good reason</li>
+        </ul>
+        <div style="padding: 8px; border: 1px solid lightgrey">
+            <p>Image:</p>
+            <canvas id="canvas"></canvas><br>
+                <input type="file" id="file-input" /><br><br>
+                <button onclick="extract();">Extract</button><br><br>
+                <button onclick="inject();">Inject</button><br><br>
+                <button onclick="save();">Save</button><br><br>
+                <button onclick="invert();">Invert</button>
         </div>
+        <p>Message to Inject:</p>
+        <textarea id="injectionMessage" cols="40" rows="8"></textarea>
+        <p>Extracted Message:</p>
         <p id="extractionMessage"></p>
+        <script src="js/main.js"></script>
     </body>
 </html>
