@@ -13,37 +13,28 @@
         <meta name="apple-mobile-web-app-status-bar-style" content="black" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta charset="UTF-8">
-        <title>Bitwise</title>
+        <link rel="stylesheet" type="text/css" href="css/style.css">
+        <title>🕵️ Steganography</title>
     </head>
-    <body style="font-family: Consolas">
-        <h1 style="text-align: center">STEGANOGRAPHY</h1>
-        <h3 style="text-align: center">Read and Write Steganographic Messages</h3>
-        <ul style="border: 1px solid lightgrey"><u>How to use this page:</u>
-            <li>Browse: Upload an image (JPG, no-alpha PNG)</li>
-            <li>Extract: Extract a steganographic message</li>
-                <ul>
-                    <li>Message will appear below</li>
-                </ul>
-            <li>Inject: Inject a steganographic message
-                <ul>
-                    <li>Enter message into field below</li>
-                </ul>
-            </li>
-            <li>Invert: Invert the color of the image for no good reason</li>
-        </ul>
-        <div style="padding: 8px; border: 1px solid lightgrey">
-            <p>Image:</p>
-            <canvas id="canvas"></canvas><br>
-                <input type="file" id="file-input" /><br><br>
-                <button onclick="extract();">Extract</button><br><br>
-                <button onclick="inject();">Inject</button><br><br>
-                <button onclick="save();">Save</button><br><br>
-                <button onclick="invert();">Invert</button>
+    <body>
+        <h1>STEGANOGRAPHY</h1>
+        <h3>Read and Write Steganographic Messages</h3>
+        <div class="area">
+            <button onclick="extract();">🕵️ Extract Message</button>
+            <button id="inject" onclick="inject();">🖊️ Inject Message</button>
+            <button onclick="save();">💾 Save Image</button>
+            <button onclick="invert();">🖼️ Invert Image</button><br><br>
+        🔎 <input type="file" id="file-input" accept=".jpg,.png" /><br><br>
+            <canvas id="canvas"></canvas>
         </div>
-        <p>Message to Inject:</p>
-        <textarea id="injectionMessage" cols="40" rows="8"></textarea>
-        <p>Extracted Message:</p>
-        <p id="extractionMessage"></p>
+        <div class="area">
+            <p id="label_injectionMessage">Message to Inject: (/)</p>
+            <textarea class="textArea" id="injectionMessage" oninput="undateLabelInjectionMessage()" placeholder='Type a message and click "Inject Message" above...' rows="8"></textarea>
+        </div>
+        <div class="area">
+            Extracted Message:<br>
+            <p class="textArea" id="extractionMessage"><span style="color: grey; font-size: 12px;">Click "Extract Message" above...</span></p>
+        </div>
         <script src="js/main.js"></script>
     </body>
 </html>
